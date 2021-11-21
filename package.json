@@ -1,0 +1,15 @@
+{
+    "name": "websockets-play",
+    "version": "1.0.0",
+    "description": "",
+    "type": "module",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index"
+    },
+    "author": "Mario A. Santini <alexmario74@gmail.com>",
+    "license": "ISC",
+    "dependencies": {
+        "websocket": "^1.0.34"
+    }
+}
