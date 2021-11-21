@@ -1,7 +1,7 @@
 {
     "name": "websockets-play",
     "version": "1.0.0",
-    "description": "",
+    "description": "This is an exercise, a case study, on WebSocket(s), not a library nor an app.",
     "type": "module",
     "main": "index.js",
     "scripts": {
