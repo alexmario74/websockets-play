@@ -9,10 +9,6 @@ function log(name, ...args) {
 
 export default {
     new(name = "main") {
-        return {
-            log(...args) {
-                log(name, ...args)
-            }
-        }
+        return (...args) => log(name, ...args)
     }
 }

@@ -21,10 +21,10 @@ function sendMessage(source, dest) {
         evt.preventDefault()
         evt.stopPropagation()
 
-        debug.log("send message", source.value)
+        debug("send message", source.value)
         try {
             if (source.value === "") {
-                debug.log("value is empty");
+                debug("value is empty");
                 return;
             }
 
@@ -32,7 +32,7 @@ function sendMessage(source, dest) {
             dest(res)
             source.value = ""
         } catch (e) {
-            debug.log("request failed", e)
+            debug("request failed", e)
         }
     }
 }
@@ -50,10 +50,10 @@ btn.addEventListener(
         try {
             await clickHandler(ev)
         } catch (e) {
-            error.log("send message failed", e)
+            error("send message failed", e)
         }
         btn.removeAttribute("disabled")
     },
 )
 
-debug.log("loaded")
+debug("loaded")

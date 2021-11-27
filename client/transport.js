@@ -21,16 +21,16 @@ function WsHandler(address = "ws://localhost:8080") {
 
     function open({ target: ws }) {
         status = ws.readyState
-        debug.log("transport connection open", ws)
+        debug("transport connection open", ws)
     }
-    
+
     function close({ target: ws }) {
         status = ws.readyState
-        debug.log("transport connection closed");
+        debug("transport connection closed");
     }
 
     function message({ data: message }) {
-        debug.log("transport received message", message)
+        debug("transport received message", message)
         const reqHandler = session.pop()
         reqHandler(message)
     }
@@ -61,25 +61,25 @@ function WsHandler(address = "ws://localhost:8080") {
 
     return {
         async send(msg) {
-            return new Promise(async (resolve, reject) => {
-               session.push(message => {
-                   debug.log("resolve send")
-                   resolve(message)
-               })
-               if (status !== WebSocket.OPEN) {
-                   ws = await connect()
-                   if (ws.readyState !== WebSocket.OPEN) {
-                       return reject("cannot open connection")
-                   }
-               }
-               ws.send(msg)
-               setTimeout(() => {
-                   reject("timeout", 30, "sec.")
-               }, 30000)
-            })
-            .catch(e => {
-                error.log("cannot send message", msg, "because", e)
-            })
+            return new Promise(async(resolve, reject) => {
+                    session.push(message => {
+                        debug("resolve send")
+                        resolve(message)
+                    })
+                    if (status !== WebSocket.OPEN) {
+                        ws = await connect()
+                        if (ws.readyState !== WebSocket.OPEN) {
+                            return reject("cannot open connection")
+                        }
+                    }
+                    ws.send(msg)
+                    setTimeout(() => {
+                        reject("timeout", 30, "sec.")
+                    }, 30000)
+                })
+                .catch(e => {
+                    error("cannot send message", msg, "because", e)
+                })
         }
     }
 }
