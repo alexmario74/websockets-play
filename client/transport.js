@@ -37,7 +37,6 @@ function WsHandler(address = "ws://localhost:8080") {
         try {
             await retry(() => {
                 if (status === WebSocket.OPEN) {
-                    resolve(ws)
                     return true
                 }
                 return false
@@ -45,6 +44,8 @@ function WsHandler(address = "ws://localhost:8080") {
         } catch (e) {
             error(e)
         }
+
+        return ws
     }
 
     ws = new WebSocket(address)
