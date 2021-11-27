@@ -30,9 +30,9 @@ Then open the browser and go to `http://localhost:8080/`.
 
 One of the main issues on this kind of approach is to toone the WebSocket session.
 
-It is trivial to open the websocket then close it after the requests is fulfilled.
+It is trivial to open the websocket then close it after the request is fulfilled.
 
-But open a session for each requests can be slow.
+But open a session for each request can be slow.
 
 In this exercise I use an object to keep the socket open and if the connection is lost for some reason I attempt to reopen the connection on the next message send.
 
