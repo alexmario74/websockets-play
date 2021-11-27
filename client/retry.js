@@ -1,10 +1,14 @@
-export default function retry(t, maxAttempts, timeout) {
-    if (maxAttempts === 0) {
-        throw new Error("max attempts reached")
-    }
-    setTimeout(() => {
-        if (!t()) {
-            retry(t, maxAttempts - 1, timeout)
+export default async function retry(t, maxAttempts, timeout) {
+    return new Promise((resolve, reject) => {
+        if (maxAttempts === 0) {
+            return reject("max attempts reached")
         }
-    }, timeout)
+
+        setTimeout(() => {
+            if (!t())
+                return retry(t, maxAttempts - 1, timeout)
+
+            resolve(true)
+        }, timeout)
+    })
 }

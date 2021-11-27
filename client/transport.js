@@ -34,15 +34,17 @@ function WsHandler(address = "ws://localhost:8080") {
     async function connect() {
         ws = new WebSocket(address)
         bind(ws)
-        return new Promise((resolve, reject) => {
-            retry(() => {
+        try {
+            await retry(() => {
                 if (status === WebSocket.OPEN) {
                     resolve(ws)
                     return true
                 }
                 return false
             }, 3, 200)
-        })
+        } catch (e) {
+            error(e)
+        }
     }
 
     ws = new WebSocket(address)
