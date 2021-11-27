@@ -1,18 +1,8 @@
 import Logger from "../log.js"
+import retry from "./retry.js"
 
 const debug = Logger.new("ws transport")
 const error = Logger.new("ws transport ERROR")
-
-function retry(t, maxAttempts, timeout) {
-    if (maxAttempts === 0) {
-        throw new Error("max attempts reached")
-    }
-    setTimeout(() => {
-        if (!t()) {
-            retry(t, maxAttempts - 1, timeout)
-        }
-    }, timeout)
-}
 
 function WsHandler(address = "ws://localhost:8080") {
     let ws = null
